@@ -1,0 +1,1042 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Soham Chikane — Full-Stack Software Engineer</title>
+    <meta name="description"
+        content="Portfolio of Soham Chikane, Full-Stack Software Engineer based in Mumbai, India." />
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=Inter:wght@400;500;600&family=JetBrains+Mono:wght@400;500;600&display=swap"
+        rel="stylesheet">
+    <style>
+        :root {
+            --bg: #0a0a0a;
+            --bg-elevated: #131313;
+            --bg-card: #161616;
+            --fg: #f5f5f3;
+            --fg-muted: #98988f;
+            --fg-dim: #5c5c56;
+            --border: #262622;
+            --border-hover: #3a3a34;
+            --white: #ffffff;
+            --space-xs: 8px;
+            --space-sm: 16px;
+            --space-md: 24px;
+            --space-lg: 48px;
+            --space-xl: 96px;
+            --font-head: 'Space Grotesk', sans-serif;
+            --font-body: 'Inter', sans-serif;
+            --font-mono: 'JetBrains Mono', monospace;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        html {
+            scroll-behavior: smooth;
+        }
+
+        body {
+            background: var(--bg);
+            color: var(--fg);
+            font-family: var(--font-body);
+            line-height: 1.6;
+            overflow-x: hidden;
+        }
+
+        ::selection {
+            background: var(--white);
+            color: var(--bg);
+        }
+
+        a {
+            color: inherit;
+            text-decoration: none;
+        }
+
+        ul {
+            list-style: none;
+        }
+
+        img {
+            max-width: 100%;
+            display: block;
+        }
+
+        /* faint background grid — quiet, technical texture */
+        .grid-bg {
+            position: fixed;
+            inset: 0;
+            z-index: 0;
+            pointer-events: none;
+            background-image:
+                linear-gradient(to right, rgba(255, 255, 255, 0.035) 1px, transparent 1px),
+                linear-gradient(to bottom, rgba(255, 255, 255, 0.035) 1px, transparent 1px);
+            background-size: 64px 64px;
+            mask-image: radial-gradient(ellipse 80% 60% at 50% 0%, black 40%, transparent 100%);
+        }
+
+        .wrap {
+            max-width: 1040px;
+            margin: 0 auto;
+            padding: 0 24px;
+            position: relative;
+            z-index: 1;
+        }
+
+        /* NAV */
+        nav {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            z-index: 50;
+            border-bottom: 1px solid transparent;
+            transition: border-color .3s ease, background-color .3s ease;
+        }
+
+        nav.scrolled {
+            background: rgba(10, 10, 10, 0.85);
+            backdrop-filter: blur(10px);
+            border-bottom-color: var(--border);
+        }
+
+        nav .wrap {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            height: 72px;
+        }
+
+        .logo {
+            font-family: var(--font-mono);
+            font-weight: 600;
+            font-size: 15px;
+            letter-spacing: .02em;
+        }
+
+        .logo .dot {
+            color: var(--fg-dim);
+        }
+
+        .nav-links {
+            display: flex;
+            gap: var(--space-lg);
+            align-items: center;
+        }
+
+        .nav-links a {
+            font-size: 14px;
+            color: var(--fg-muted);
+            position: relative;
+            padding: 4px 0;
+            transition: color .25s ease;
+        }
+
+        .nav-links a::after {
+            content: '';
+            position: absolute;
+            left: 0;
+            bottom: 0;
+            height: 1px;
+            width: 0;
+            background: var(--white);
+            transition: width .25s ease;
+        }
+
+        .nav-links a:hover {
+            color: var(--fg);
+        }
+
+        .nav-links a:hover::after {
+            width: 100%;
+        }
+
+        .nav-cta {
+            font-size: 13px;
+            font-family: var(--font-mono);
+            border: 1px solid var(--border-hover);
+            padding: 8px 16px;
+            border-radius: 2px;
+            color: var(--fg);
+            transition: all .25s ease;
+        }
+
+        .nav-cta:hover {
+            background: var(--white);
+            color: var(--bg);
+            border-color: var(--white);
+        }
+
+        .nav-toggle {
+            display: none;
+            background: none;
+            border: none;
+            color: var(--fg);
+            font-size: 22px;
+            cursor: pointer;
+        }
+
+        /* HERO */
+        header.hero {
+            min-height: 100svh;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            padding-top: 96px;
+            padding-bottom: 64px;
+            position: relative;
+        }
+
+        .eyebrow {
+            font-family: var(--font-mono);
+            font-size: 13px;
+            color: var(--fg-dim);
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            margin-bottom: 28px;
+        }
+
+        .eyebrow .pulse {
+            width: 7px;
+            height: 7px;
+            border-radius: 50%;
+            background: #5eff9c;
+            box-shadow: 0 0 8px #5eff9c;
+            animation: pulse 2s ease-in-out infinite;
+        }
+
+        @keyframes pulse {
+
+            0%,
+            100% {
+                opacity: 1;
+            }
+
+            50% {
+                opacity: .35;
+            }
+        }
+
+        h1.name {
+            font-family: var(--font-head);
+            font-weight: 700;
+            font-size: clamp(40px, 8vw, 84px);
+            line-height: .98;
+            letter-spacing: -.02em;
+            margin-bottom: 20px;
+        }
+
+        h1.name .last {
+            color: var(--fg-dim);
+        }
+
+        .terminal-line {
+            font-family: var(--font-mono);
+            font-size: clamp(15px, 2.2vw, 19px);
+            color: var(--fg-muted);
+            margin-bottom: 32px;
+            min-height: 1.6em;
+        }
+
+        .terminal-line .prompt {
+            color: var(--fg-dim);
+        }
+
+        .terminal-line .cursor {
+            display: inline-block;
+            width: 9px;
+            height: 1.1em;
+            background: var(--white);
+            vertical-align: text-bottom;
+            margin-left: 2px;
+            animation: blink 1s step-end infinite;
+        }
+
+        @keyframes blink {
+            50% {
+                opacity: 0;
+            }
+        }
+
+        .hero-desc {
+            max-width: 520px;
+            color: var(--fg-muted);
+            font-size: 16px;
+            margin-bottom: 44px;
+        }
+
+        .hero-cta {
+            display: flex;
+            gap: 16px;
+            flex-wrap: wrap;
+        }
+
+        .btn {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            font-size: 14px;
+            font-weight: 500;
+            padding: 14px 24px;
+            border-radius: 2px;
+            transition: all .25s ease;
+            cursor: pointer;
+        }
+
+        .btn-primary {
+            background: var(--white);
+            color: var(--bg);
+        }
+
+        .btn-primary:hover {
+            background: #e2e2df;
+            transform: translateY(-1px);
+        }
+
+        .btn-ghost {
+            border: 1px solid var(--border-hover);
+            color: var(--fg);
+        }
+
+        .btn-ghost:hover {
+            border-color: var(--fg);
+            background: rgba(255, 255, 255, 0.04);
+        }
+
+        .scroll-cue {
+            position: absolute;
+            bottom: 36px;
+            left: 24px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            font-family: var(--font-mono);
+            font-size: 12px;
+            color: var(--fg-dim);
+        }
+
+        .scroll-cue .line {
+            width: 1px;
+            height: 32px;
+            background: linear-gradient(var(--fg-dim), transparent);
+            animation: scrollcue 1.8s ease-in-out infinite;
+        }
+
+        @keyframes scrollcue {
+            0% {
+                transform: scaleY(0);
+                transform-origin: top;
+            }
+
+            50% {
+                transform: scaleY(1);
+                transform-origin: top;
+            }
+
+            51% {
+                transform-origin: bottom;
+            }
+
+            100% {
+                transform: scaleY(0);
+                transform-origin: bottom;
+            }
+        }
+
+        /* SECTION SHARED */
+        section {
+            padding: var(--space-xl) 0;
+            position: relative;
+            border-top: 1px solid var(--border);
+        }
+
+        .section-head {
+            display: flex;
+            align-items: baseline;
+            gap: 16px;
+            margin-bottom: 56px;
+        }
+
+        .section-num {
+            font-family: var(--font-mono);
+            font-size: 13px;
+            color: var(--fg-dim);
+        }
+
+        .section-title {
+            font-family: var(--font-head);
+            font-size: clamp(26px, 3.5vw, 34px);
+            font-weight: 600;
+            letter-spacing: -.01em;
+        }
+
+        /* ABOUT */
+        .about-grid {
+            display: grid;
+            grid-template-columns: 1.3fr 1fr;
+            gap: 64px;
+            align-items: start;
+        }
+
+        .about-text p {
+            color: var(--fg-muted);
+            font-size: 16px;
+            margin-bottom: 18px;
+            max-width: 52ch;
+        }
+
+        .about-text p strong {
+            color: var(--fg);
+            font-weight: 600;
+        }
+
+        .facts {
+            border-left: 1px solid var(--border);
+            padding-left: 28px;
+        }
+
+        .fact {
+            margin-bottom: 22px;
+        }
+
+        .fact .k {
+            font-family: var(--font-mono);
+            font-size: 12px;
+            color: var(--fg-dim);
+            text-transform: uppercase;
+            letter-spacing: .08em;
+            margin-bottom: 4px;
+        }
+
+        .fact .v {
+            font-size: 15px;
+            color: var(--fg);
+        }
+
+        /* SKILLS */
+        .skills-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 1px;
+            background: var(--border);
+            border: 1px solid var(--border);
+        }
+
+        .skill-group {
+            background: var(--bg);
+            padding: 28px;
+        }
+
+        .skill-group h3 {
+            font-family: var(--font-mono);
+            font-size: 12px;
+            color: var(--fg-dim);
+            text-transform: uppercase;
+            letter-spacing: .08em;
+            margin-bottom: 16px;
+        }
+
+        .skill-tags {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 8px;
+        }
+
+        .tag {
+            font-family: var(--font-mono);
+            font-size: 13px;
+            padding: 6px 12px;
+            border: 1px solid var(--border-hover);
+            border-radius: 2px;
+            color: var(--fg-muted);
+            transition: all .25s ease;
+        }
+
+        .tag:hover {
+            color: var(--fg);
+            border-color: var(--fg);
+            transform: translateY(-2px);
+        }
+
+        /* WORK */
+        .work-list {
+            display: flex;
+            flex-direction: column;
+        }
+
+        .work-item {
+            display: grid;
+            grid-template-columns: 80px 1fr;
+            gap: 32px;
+            padding: 36px 0;
+            border-bottom: 1px solid var(--border);
+        }
+
+        .work-item:first-child {
+            border-top: 1px solid var(--border);
+        }
+
+        .work-index {
+            font-family: var(--font-mono);
+            font-size: 13px;
+            color: var(--fg-dim);
+            padding-top: 4px;
+        }
+
+        .work-head {
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-start;
+            gap: 16px;
+            flex-wrap: wrap;
+            margin-bottom: 10px;
+        }
+
+        .work-title {
+            font-family: var(--font-head);
+            font-size: 22px;
+            font-weight: 600;
+        }
+
+        .work-status {
+            font-family: var(--font-mono);
+            font-size: 11px;
+            color: var(--fg-dim);
+            border: 1px solid var(--border-hover);
+            padding: 4px 10px;
+            border-radius: 2px;
+            white-space: nowrap;
+        }
+
+        .work-desc {
+            color: var(--fg-muted);
+            font-size: 15px;
+            max-width: 64ch;
+            margin-bottom: 16px;
+        }
+
+        .work-tech {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 8px;
+        }
+
+        .work-tech span {
+            font-family: var(--font-mono);
+            font-size: 12px;
+            color: var(--fg-dim);
+        }
+
+        .work-tech span:not(:last-child)::after {
+            content: ' /';
+            margin-left: 8px;
+        }
+
+        /* EXPERIENCE TIMELINE */
+        .timeline {
+            position: relative;
+            padding-left: 32px;
+            border-left: 1px solid var(--border);
+        }
+
+        .tl-item {
+            position: relative;
+            padding-bottom: 44px;
+        }
+
+        .tl-item:last-child {
+            padding-bottom: 0;
+        }
+
+        .tl-dot {
+            position: absolute;
+            left: -37px;
+            top: 4px;
+            width: 11px;
+            height: 11px;
+            border-radius: 50%;
+            background: var(--bg);
+            border: 2px solid var(--white);
+        }
+
+        .tl-role {
+            font-family: var(--font-head);
+            font-size: 20px;
+            font-weight: 600;
+            margin-bottom: 2px;
+        }
+
+        .tl-meta {
+            font-family: var(--font-mono);
+            font-size: 13px;
+            color: var(--fg-dim);
+            margin-bottom: 14px;
+        }
+
+        .tl-bullets {
+            color: var(--fg-muted);
+            font-size: 15px;
+            padding-left: 18px;
+        }
+
+        .tl-bullets li {
+            margin-bottom: 8px;
+            list-style: disc;
+        }
+
+        /* CONTACT */
+        .contact-inner {
+            text-align: center;
+            padding: var(--space-xl) 0;
+        }
+
+        .contact-title {
+            font-family: var(--font-head);
+            font-weight: 700;
+            font-size: clamp(32px, 6vw, 56px);
+            letter-spacing: -.02em;
+            margin-bottom: 20px;
+        }
+
+        .contact-sub {
+            color: var(--fg-muted);
+            max-width: 480px;
+            margin: 0 auto 40px;
+        }
+
+        .contact-links {
+            display: flex;
+            justify-content: center;
+            gap: 16px;
+            flex-wrap: wrap;
+            margin-bottom: 56px;
+        }
+
+        .contact-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 1px;
+            background: var(--border);
+            border: 1px solid var(--border);
+            max-width: 720px;
+            margin: 0 auto;
+        }
+
+        .contact-cell {
+            background: var(--bg);
+            padding: 24px 16px;
+            text-align: left;
+            transition: background .25s ease;
+        }
+
+        .contact-cell:hover {
+            background: var(--bg-elevated);
+        }
+
+        .contact-cell .k {
+            font-family: var(--font-mono);
+            font-size: 11px;
+            color: var(--fg-dim);
+            text-transform: uppercase;
+            letter-spacing: .08em;
+            margin-bottom: 8px;
+        }
+
+        .contact-cell .v {
+            font-size: 14px;
+            word-break: break-word;
+        }
+
+        footer {
+            border-top: 1px solid var(--border);
+            padding: 32px 0;
+        }
+
+        footer .wrap {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-wrap: wrap;
+            gap: 12px;
+        }
+
+        footer p {
+            font-family: var(--font-mono);
+            font-size: 12px;
+            color: var(--fg-dim);
+        }
+
+        .reveal {
+            opacity: 0;
+            transform: translateY(14px);
+        }
+
+        @media (max-width:800px) {
+            .nav-links {
+                position: fixed;
+                top: 72px;
+                left: 0;
+                right: 0;
+                background: rgba(10, 10, 10, 0.97);
+                backdrop-filter: blur(10px);
+                flex-direction: column;
+                align-items: flex-start;
+                padding: 24px;
+                gap: 20px;
+                border-bottom: 1px solid var(--border);
+                transform: translateY(-8px);
+                opacity: 0;
+                pointer-events: none;
+                transition: all .25s ease;
+            }
+
+            .nav-links.open {
+                transform: translateY(0);
+                opacity: 1;
+                pointer-events: auto;
+            }
+
+            .nav-toggle {
+                display: block;
+            }
+
+            .nav-cta {
+                display: none;
+            }
+
+            .about-grid {
+                grid-template-columns: 1fr;
+                gap: 40px;
+            }
+
+            .facts {
+                border-left: none;
+                padding-left: 0;
+                border-top: 1px solid var(--border);
+                padding-top: 24px;
+            }
+
+            .skills-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .work-item {
+                grid-template-columns: 1fr;
+                gap: 8px;
+            }
+
+            .contact-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        @media (prefers-reduced-motion: reduce) {
+            * {
+                animation-duration: 0.01ms !important;
+                animation-iteration-count: 1 !important;
+                transition-duration: 0.01ms !important;
+                scroll-behavior: auto !important;
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+    <div class="grid-bg"></div>
+
+    <nav id="nav">
+        <div class="wrap">
+            <a href="#top" class="logo">soham<span class="dot">.</span>dev</a>
+            <ul class="nav-links" id="navLinks">
+                <li><a href="#about">About</a></li>
+                <li><a href="#skills">Skills</a></li>
+                <li><a href="#work">Work</a></li>
+                <li><a href="#experience">Experience</a></li>
+                <li><a href="#contact">Contact</a></li>
+            </ul>
+            <a class="nav-cta" href="#contact">Get in touch</a>
+            <button class="nav-toggle" id="navToggle" aria-label="Toggle menu">☰</button>
+        </div>
+    </nav>
+
+    <header class="hero" id="top">
+        <div class="wrap">
+            <div class="eyebrow"><span class="pulse"></span> AVAILABLE FOR OPPORTUNITIES · MUMBAI, INDIA</div>
+            <h1 class="name">Soham <span class="last">Chikane</span></h1>
+            <div class="terminal-line"><span class="prompt">&gt;</span> <span id="typed"></span><span
+                    class="cursor"></span></div>
+            <p class="hero-desc">I build full-stack web applications — from authentication systems to end-to-end product
+                features — with React, Node.js and PostgreSQL, currently as an Associate Software Engineer at Cateina
+                Technologies.</p>
+            <div class="hero-cta">
+                <a href="mailto:sohamdchikane7@gmail.com" class="btn btn-primary">Get in touch</a>
+                <a href="#work" class="btn btn-ghost">See my work</a>
+            </div>
+        </div>
+        <div class="scroll-cue"><span class="line"></span> SCROLL</div>
+    </header>
+
+    <section id="about">
+        <div class="wrap">
+            <div class="section-head"><span class="section-num">01</span>
+                <h2 class="section-title">About</h2>
+            </div>
+            <div class="about-grid">
+                <div class="about-text reveal">
+                    <p>I'm a <strong>full-stack software engineer</strong> based in Mumbai, focused on building reliable
+                        web applications end-to-end — from database schema to the pixels on screen.</p>
+                    <p>My day-to-day centers on <strong>React and Node.js</strong>, and I've spent a good chunk of the
+                        last year working closely with <strong>Keycloak for authentication and role-based access
+                            control</strong>, alongside PostgreSQL and MongoDB for data layers.</p>
+                    <p>I care about writing code that's easy for the next person to pick up, and about the small
+                        interaction details that make a product feel considered rather than assembled.</p>
+                </div>
+                <div class="facts reveal">
+                    <div class="fact">
+                        <div class="k">Location</div>
+                        <div class="v">Mumbai, India</div>
+                    </div>
+                    <div class="fact">
+                        <div class="k">Role</div>
+                        <div class="v">Associate Software Engineer</div>
+                    </div>
+                    <div class="fact">
+                        <div class="k">Focus</div>
+                        <div class="v">Full-stack web · Auth & Access Control</div>
+                    </div>
+                    <div class="fact">
+                        <div class="k">Email</div>
+                        <div class="v">sohamdchikane7@gmail.com</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="skills">
+        <div class="wrap">
+            <div class="section-head"><span class="section-num">02</span>
+                <h2 class="section-title">Skills</h2>
+            </div>
+            <div class="skills-grid reveal">
+                <div class="skill-group">
+                    <h3>Frontend</h3>
+                    <div class="skill-tags">
+                        <span class="tag">React.js</span><span class="tag">JavaScript</span><span
+                            class="tag">TypeScript</span><span class="tag">Tailwind CSS</span>
+                    </div>
+                </div>
+                <div class="skill-group">
+                    <h3>Backend</h3>
+                    <div class="skill-tags">
+                        <span class="tag">Node.js</span><span class="tag">Express.js</span><span class="tag">REST
+                            APIs</span>
+                    </div>
+                </div>
+                <div class="skill-group">
+                    <h3>Auth & Security</h3>
+                    <div class="skill-tags">
+                        <span class="tag">Keycloak</span><span class="tag">JWT</span><span class="tag">RBAC</span>
+                    </div>
+                </div>
+                <div class="skill-group">
+                    <h3>Database & Tools</h3>
+                    <div class="skill-tags">
+                        <span class="tag">MongoDB</span><span class="tag">PostgreSQL</span><span
+                            class="tag">Git</span><span class="tag">Linux</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="work">
+        <div class="wrap">
+            <div class="section-head"><span class="section-num">03</span>
+                <h2 class="section-title">Selected Work</h2>
+            </div>
+            <div class="work-list">
+                <div class="work-item reveal">
+                    <div class="work-index">01</div>
+                    <div>
+                        <div class="work-head">
+                            <div class="work-title">Client Corporate Website</div>
+                            <div class="work-status">Client project · NDA</div>
+                        </div>
+                        <p class="work-desc">A full-stack corporate website built for a client, covering everything from
+                            the marketing pages to an authenticated backend, with secure login handled through Keycloak.
+                        </p>
+                        <div class="work-tech">
+                            <span>React</span><span>Node.js</span><span>Keycloak</span><span>PostgreSQL</span></div>
+                    </div>
+                </div>
+                <div class="work-item reveal">
+                    <div class="work-index">02</div>
+                    <div>
+                        <div class="work-head">
+                            <div class="work-title">Internal Access-Control Platform</div>
+                            <div class="work-status">Client project · NDA</div>
+                        </div>
+                        <p class="work-desc">A role-based access control system for an internal product, handling
+                            authentication, permissions and user management across multiple teams.</p>
+                        <div class="work-tech">
+                            <span>React</span><span>Express.js</span><span>JWT</span><span>MongoDB</span></div>
+                    </div>
+                </div>
+                <div class="work-item reveal">
+                    <div class="work-index">03</div>
+                    <div>
+                        <div class="work-head">
+                            <div class="work-title">More work in progress</div>
+                            <div class="work-status">Coming soon</div>
+                        </div>
+                        <p class="work-desc">Personal and open-source projects are in the works — this section will link
+                            out to live demos and repos as they're ready to share.</p>
+                        <div class="work-tech"><span>React</span><span>Node.js</span></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="experience">
+        <div class="wrap">
+            <div class="section-head"><span class="section-num">04</span>
+                <h2 class="section-title">Experience</h2>
+            </div>
+            <div class="timeline reveal">
+                <div class="tl-item">
+                    <div class="tl-dot"></div>
+                    <div class="tl-role">Associate Software Engineer — Cateina Technologies</div>
+                    <div class="tl-meta">Aug 2024 — Present · Full-time</div>
+                    <ul class="tl-bullets">
+                        <li>Build and maintain full-stack features across React front ends and Node.js/Express back
+                            ends.</li>
+                        <li>Implement authentication and role-based access control using Keycloak and JWT.</li>
+                        <li>Work with PostgreSQL and MongoDB to design and query application data layers.</li>
+                        <li>Collaborate with the team through Git-based workflows on GitHub/GitLab.</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="contact">
+        <div class="wrap contact-inner">
+            <h2 class="contact-title reveal">Let's work<br />together.</h2>
+            <p class="contact-sub reveal">Open to full-stack roles and freelance work. The fastest way to reach me is
+                email.</p>
+            <div class="contact-links reveal">
+                <a href="mailto:sohamdchikane7@gmail.com" class="btn btn-primary">sohamdchikane7@gmail.com</a>
+                <a href="https://github.com/sohamdc" target="_blank" rel="noopener" class="btn btn-ghost">GitHub ↗</a>
+            </div>
+            <div class="contact-grid reveal">
+                <div class="contact-cell">
+                    <div class="k">Email</div>
+                    <div class="v">sohamdchikane7@gmail.com</div>
+                </div>
+                <div class="contact-cell">
+                    <div class="k">Phone</div>
+                    <div class="v">+91 98201 80742</div>
+                </div>
+                <div class="contact-cell">
+                    <div class="k">GitHub</div>
+                    <div class="v">github.com/sohamdc</div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <footer>
+        <div class="wrap">
+            <p>© 2026 Soham Chikane</p>
+            <p>Built with HTML, CSS & JS</p>
+        </div>
+    </footer>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js"></script>
+    <script>
+        // Nav scroll state
+        const nav = document.getElementById('nav');
+        window.addEventListener('scroll', () => {
+            nav.classList.toggle('scrolled', window.scrollY > 20);
+        });
+
+        // Mobile nav toggle
+        const navToggle = document.getElementById('navToggle');
+        const navLinks = document.getElementById('navLinks');
+        navToggle.addEventListener('click', () => navLinks.classList.toggle('open'));
+        navLinks.querySelectorAll('a').forEach(a => a.addEventListener('click', () => navLinks.classList.remove('open')));
+
+        // Terminal typing effect
+        const roles = [
+            "const role = 'Full-Stack Software Engineer';",
+            "const stack = ['React', 'Node.js', 'PostgreSQL'];",
+            "const focus = 'Auth & Access Control Systems';"
+        ];
+        const typedEl = document.getElementById('typed');
+        const reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+        if (reduceMotion) {
+            typedEl.textContent = roles[0];
+        } else {
+            let roleIdx = 0, charIdx = 0, deleting = false;
+            function typeLoop() {
+                const current = roles[roleIdx];
+                if (!deleting) {
+                    charIdx++;
+                    typedEl.textContent = current.slice(0, charIdx);
+                    if (charIdx === current.length) { deleting = true; setTimeout(typeLoop, 1600); return; }
+                } else {
+                    charIdx--;
+                    typedEl.textContent = current.slice(0, charIdx);
+                    if (charIdx === 0) { deleting = false; roleIdx = (roleIdx + 1) % roles.length; }
+                }
+                setTimeout(typeLoop, deleting ? 22 : 38);
+            }
+            typeLoop();
+        }
+
+        // Scroll reveal animations
+        if (window.gsap && window.ScrollTrigger) {
+            gsap.registerPlugin(ScrollTrigger);
+            if (reduceMotion) {
+                gsap.set('.reveal', { opacity: 1, y: 0 });
+            } else {
+                document.querySelectorAll('.reveal').forEach((el) => {
+                    gsap.fromTo(el, { opacity: 0, y: 16 }, {
+                        opacity: 1, y: 0, duration: 0.6, ease: 'power2.out',
+                        scrollTrigger: { trigger: el, start: 'top 88%', toggleActions: 'play none none reverse' }
+                    });
+                });
+                // Stagger skill tags within each visible group
+                document.querySelectorAll('.skill-group').forEach((group) => {
+                    gsap.fromTo(group.querySelectorAll('.tag'), { opacity: 0, y: 8 }, {
+                        opacity: 1, y: 0, duration: 0.4, stagger: 0.05, ease: 'power1.out',
+                        scrollTrigger: { trigger: group, start: 'top 90%' }
+                    });
+                });
+                // Work items cascade
+                gsap.fromTo('.work-item', { opacity: 0, y: 20 }, {
+                    opacity: 1, y: 0, duration: 0.5, stagger: 0.12, ease: 'power2.out',
+                    scrollTrigger: { trigger: '.work-list', start: 'top 85%' }
+                });
+            }
+        } else {
+            document.querySelectorAll('.reveal').forEach(el => el.style.opacity = 1);
+        }
+    </script>
+</body>
+
+</html>
