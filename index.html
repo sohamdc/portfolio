@@ -541,6 +541,32 @@
             margin-left: 8px;
         }
 
+        .work-links {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 18px;
+            margin-top: 16px;
+        }
+
+        .work-links a {
+            font-family: var(--font-mono);
+            font-size: 12px;
+            color: var(--fg);
+            border-bottom: 1px solid var(--border-hover);
+            padding-bottom: 3px;
+            transition: color .2s ease, border-color .2s ease;
+        }
+
+        .work-links a:hover {
+            color: var(--white);
+            border-color: var(--white);
+        }
+
+        .work-links a:focus-visible {
+            outline: 2px solid var(--white);
+            outline-offset: 4px;
+        }
+
         /* EXPERIENCE TIMELINE */
         .timeline {
             position: relative;
@@ -897,12 +923,19 @@
                     <div class="work-index">03</div>
                     <div>
                         <div class="work-head">
-                            <div class="work-title">More work in progress</div>
-                            <div class="work-status">Coming soon</div>
+                            <div class="work-title">dsgnr. — Contact Page</div>
+                            <div class="work-status">Personal project</div>
                         </div>
-                        <p class="work-desc">Personal and open-source projects are in the works — this section will link
-                            out to live demos and repos as they're ready to share.</p>
-                        <div class="work-tech"><span>React</span><span>Node.js</span></div>
+                        <p class="work-desc">A responsive design-agency contact page recreated from Figma, featuring an
+                            accessible contact form with validation, responsive layouts, animated interactions, and
+                            optimized image assets.</p>
+                        <div class="work-tech">
+                            <span>React</span><span>Vite</span><span>CSS Modules</span><span>Framer Motion</span>
+                        </div>
+                        <div class="work-links">
+                            <a href="https://dsgnr-sooty.vercel.app/" target="_blank" rel="noopener noreferrer">Live Demo ↗</a>
+                            <a href="https://github.com/sohamdc/dsgnr" target="_blank" rel="noopener noreferrer">GitHub ↗</a>
+                        </div>
                     </div>
                 </div>
             </div>
